@@ -1,10 +1,7 @@
 from __future__ import print_function
 import boto3
-import os
-import sys
 import uuid
 from PIL import Image
-import PIL.Image
 import logging
 
 s3 = boto3.client('s3')
@@ -30,7 +27,7 @@ def resize_image(image_path, resized_path):
 def handler(event, context):
     for record in event['Records']:
         bucket = record['s3']['bucket']['name'] #stripes-in-film
-        key = record['s3']['object']['key'] #test-image.jpg
+        key = record['s3']['object']['key'] #test-image.jp
         response = s3.head_object(Bucket=bucket, Key=key)
         logger.info('Response: {}'.format(response))
         # print(response['Metadata']) #contains all the metadata {'approved': '0', 'description': 'asfasfasf', 'title': 'A Star Is Born (2018)'}
